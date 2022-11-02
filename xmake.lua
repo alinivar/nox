@@ -11,9 +11,9 @@ add_defines("_CRT_SECURE_NO_WARNINGS")
 set_toolchains("gcc")
 
 target("nox")
-    set_kind("binary")
+    set_kind("static")
     add_files("nox/**.c")
     add_includedirs("nox")
 
     add_links("kernel32")
-    add_ldflags("-nodefaultlibs", "-nostartfiles", "-e__init", {force = true})
+    add_ldflags("-nodefaultlibs", "-nostartfiles", {force = true})
