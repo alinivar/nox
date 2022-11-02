@@ -2,7 +2,6 @@
 Recreation of the C Standard Library for educational purposes.
 
 Fully implemented features
-* string.h
 * assert.h
 * stdbool.h
 * stdarg.h
