@@ -2,8 +2,7 @@
 #include "stdio.h"
 #include "string.h"
 
-#define WIN32_LEAN_AND_MEAN 1
-#include <Windows.h>
+#include "windows.h"
 
 #define BIT(x) (1 << x)
 
@@ -224,7 +223,7 @@ int remove(const char* pFileName) {
 }
 
 int putc(int character, FILE* pFile) {
-    return fwrite(&character, 1, 1, pFile);
+    return (int)fwrite(&character, 1, 1, pFile);
 }
 
 int putchar(int character) {
@@ -233,7 +232,7 @@ int putchar(int character) {
 }
 
 int puts(const char* pString) {
-    int len = fwrite(pString, strlen(pString), 1, stdout);
+    int len = (int)fwrite(pString, strlen(pString), 1, stdout);
     putchar('\n');
 
     return len;
@@ -262,6 +261,9 @@ int fprintf(FILE* pFile, const char* pFormat, ...) {
 
 /* Long long to string */
 static char* _lltoa(long long value, int base, int uppercase) {
+    if (value == 0)
+        return "0";
+
     static char buffer[64];
     int i = 62;
 

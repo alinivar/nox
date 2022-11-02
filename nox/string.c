@@ -205,9 +205,7 @@ char* strtok(char* str, const char* delims) {
     tok = str;
     str = strpbrk(tok, delims);
     if (str == NULL) {
-        for (size_t i = 0; 1; i++)
-            if (tok[i] == '\0')
-                tok = &tok[i];
+        olds = memchr(tok, '\0', ~0ull);
     }
     else {
         *str = '\0';
