@@ -9,13 +9,13 @@ extern "C" {
 typedef char* va_list;
 
 #define __va_align(x, alignment) \
-        ((x + (alignment-1)) & ~(alignment))
+        ((x + (alignment-1)) & ~(alignment-1))
 
 #define va_start(v, l) \
-        (void)(v = (char*)&l + sizeof(l));
+        (void)(v = (char*)&l + __va_align(sizeof(l), 8));
 
 #define va_arg(v, l) \
-        *(l*)((v += sizeof(l)) - sizeof(l))
+        *(l*)((v += __va_align(sizeof(l), 8)) - __va_align(sizeof(l), 8))
 
 #define va_end(v) \
         ((void)v)
